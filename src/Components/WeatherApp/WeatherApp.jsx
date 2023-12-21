@@ -16,10 +16,6 @@ const WeatherApp = () => {
 
   const search = async () => {
     const element = document.getElementsByClassName("cityInput");
-    if (element[0].value === "") {
-      const kinn = document.getElementsByClassName(".container");
-      kinn.style.display = "none";
-    }
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&appid=${api_key}`;
     try {
       let response = await fetch(url);
@@ -38,7 +34,27 @@ const WeatherApp = () => {
         if(data.weather[0].icon === '01d'|| data.weather[0].icon === '01n' ){
             setWicon(clear_icon);
         }
-
+        else if(data.weather[0].icon === '02d'|| data.weather[0].icon === '02n'){
+          setWicon(cloud_icon)
+        }
+        else if(data.weather[0].icon === '03d'|| data.weather[0].icon === '03n'){
+          setWicon(drizzle_icon)
+        }
+        else if(data.weather[0].icon === '04d'|| data.weather[0].icon === '04n'){
+          setWicon(drizzle_icon)
+        }
+        else if(data.weather[0].icon === '09d'|| data.weather[0].icon === '09n'){
+          setWicon(rain_icon)
+        }
+        else if(data.weather[0].icon === '10d'|| data.weather[0].icon === '10n'){
+          setWicon(rain_icon)
+        }
+        else if(data.weather[0].icon === '13d'|| data.weather[0].icon === '13n'){
+          setWicon(snow_icon)
+        }
+        else{
+          setWicon(clear_icon)
+        }
       }
       console.log("error");
     } catch (error) {
@@ -59,7 +75,7 @@ const WeatherApp = () => {
         </div>
       </div>
       <div className="weather-image">
-        <img src={wicon} alt="" />
+        <img src={wind_icon} alt="" />
       </div>
       <div className="weather-temp">24°c</div>
       <div className="weather-location">Nigeria</div>
@@ -73,7 +89,6 @@ const WeatherApp = () => {
         </div>
 
         <div className="element">
-          <img src={wind_icon} alt="" className="icon" />
           <div className="data">
             <div className="wind-rate">18 Km/h</div>
             <div className="text">Wind Speed</div>
